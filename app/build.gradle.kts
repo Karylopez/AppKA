@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("com.google.devtools.ksp") version "2.0.0-1.0.21"
+    id("com.google.devtools.ksp") version "2.0.21-1.0.25"
 }
 
 android {
@@ -21,6 +21,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    
 
     buildTypes {
         release {
@@ -31,16 +32,16 @@ android {
             )
         }
     }
+
+    // Pega este bloque DENTRO de android { }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
-    buildFeatures {
-        compose = true
-    }
+
 }
 
 dependencies {
@@ -68,7 +69,8 @@ dependencies {
     // Room para almacenamiento local
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
-    ksp("androidx.room:room-compiler:2.6.1")
+    val roomVersion = "2.6.1"
+    ksp("androidx.room:room-compiler:$roomVersion")
 
     // ViewModel y LiveData para MVVM
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
@@ -94,4 +96,8 @@ dependencies {
     implementation("androidx.camera:camera-camera2:1.3.1")
     implementation("androidx.camera:camera-lifecycle:1.3.1")
     implementation("androidx.camera:camera-view:1.3.1")
+
+    // Icons de Material (Visibility / VisibilityOff, etc.)
+    implementation("androidx.compose.material:material-icons-extended")
+
 }
